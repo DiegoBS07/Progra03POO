@@ -5,6 +5,7 @@
 package Cliente;
 
 
+import Comands.*;
 import FrameManager.ImageFrameManagerUtil;
 
 
@@ -102,206 +103,11 @@ public class FrameClient extends JFrame {
         this.repaint();
     }
     
-    /*Método que carga todos los 400 labels del mapa en el panel correspondiente*/
-    public void initOceanMap(){ 
-        //Crear las celdas
-        ArrayList<Cell> createdCells = new ArrayList<Cell>();
-        ArrayList<Cell> addedCells = new ArrayList<Cell>();
-        for (int i = 0; i < client.getFighterRegister().getFighters().size(); i++) {
-            for (int j = 0; j < client.getFigtherAmountOfCells(i); j++) {
-                Cell newCell = new Cell(client.getFighterRegister().getFighter(i));
-                createdCells.add(newCell);
-            }
-        }
-        //Añadir las celdas de forma aleatoria en el frame
-        Random random = new Random();
-        while (addedCells.size() < NUMBER_OF_CELLS){
-            int index = random.nextInt(NUMBER_OF_CELLS);
-            if (!addedCells.contains(createdCells.get(index))){
-                addedCells.add(createdCells.get(index));
-                pnlOceanMapGrid.add(createdCells.get(index).getRefLabel());
-            }
-        }
-        //Añadir las celdas a la matriz del mapa
-        int cellCounter = 0;
-        for (int i = 0; i < NUMBER_OF_ROWS_AND_COLUMS; i++){
-            for (int j = 0; j < NUMBER_OF_ROWS_AND_COLUMS; j++){
-                client.getOceanMap()[i][j] = addedCells.get(cellCounter++);
-            }
-        }
-        //Agregación del header para las rows
-        for (int i = 1; i <= NUMBER_OF_ROWS_AND_COLUMS; i++){
-            JLabel lblNumberOfRow = new JLabel("" + i, SwingConstants.CENTER);
-            lblNumberOfRow.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-            pnlRowsHeader.add(lblNumberOfRow);
-        }
-        //Agregación del header para las colums
-        for (int i = 1; i <= NUMBER_OF_ROWS_AND_COLUMS; i++){
-            JLabel lblNumberOfColumn = new JLabel("" + i, SwingConstants.CENTER);
-            lblNumberOfColumn.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-            pnlColumnsHeader.add(lblNumberOfColumn);
-        }
-        client.calculateActualCellsPerFighter();
-        client.generateActualFighterPercentage();
-        insertActualHealth();
-        pnlOceanMapGrid.revalidate();
-        pnlOceanMapGrid.repaint();
-        this.revalidate();
-        this.repaint();
-
-
-    }
-    
     private void cleanCommandWritter(){
         this.txfCommand.setText("");
         this.repaint();
     }
-  
-    public void colocarPersonajes(ArrayList<Fighter> Fighters){
-        switch (Fighters.size()) {
-    case 1:
-        mostrarFighterEnTextPane(txpFighterStats1, Fighters.get(0));
-        break;
-    case 2:
-        mostrarFighterEnTextPane(txpFighterStats2, Fighters.get(1));
-        break;
-    case 3:
-        mostrarFighterEnTextPane(txpFighterStats3, Fighters.get(2));
-        break;
-}
-    }
-    
-    public void imageSelector(ArrayList<Fighter> Fighters){
-        switch (Fighters.size()) {
-    case 1:
-         insertImageinFrame(lblImgFighter1, Fighters.get(0));
-        break;
-    case 2:
-         insertImageinFrame(lblImgFighter2, Fighters.get(1));
-        break;
-    case 3:
-         insertImageinFrame(lblImgFighter3, Fighters.get(2));
-        break;
-}
-    }
 
-    public void showCellInfo(Cell info){
-            int health = info.getHealth();
-            boolean dead = info.isDead();
-            String fighterName = (info.getFighter() != null) ? info.getFighter().getName() : "Vacío";
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("Información de la celda:\n");
-            sb.append("Luchador: ").append(fighterName).append("\n");
-            sb.append("Vida: ").append(health).append("\n");
-            sb.append("Estado: ").append(dead ? "Muerto" : "Vivo").append("\n");
-
-            txaRanking.setText(sb.toString());
-        }
-
-    public void insertActualHealth() {
-        client.calculateActualCellsPerFighter();
-        int fullHealth = client.calculateFullHealth(); // porcentaje global
-        ArrayList<Fighter> fighters = client.getFighterRegister().getFighters();
-        this.client.generateActualFighterPercentage(); //Genrea el porcentaje actual de vida de peleadores
-
-        if (fighters.size() >= 3) {
-            Fighter f1 = fighters.get(0);
-            Fighter f2 = fighters.get(1);
-            Fighter f3 = fighters.get(2);
-
-            // Obtiene el porcentaje actual.
-            double p1 = f1.getTotalHealthPercentage();
-            double p2 = f2.getTotalHealthPercentage();;
-            double p3 = f3.getTotalHealthPercentage();;
-
-            // Inserta en los JTextPane
-            txpFitgtherCells1.setText(f1.getName() + ": " + p1 + "%");
-            txpFigtherCells2.setText(f2.getName() + ": " + p2 + "%");
-            txpFigtherCells3.setText(f3.getName() + ": " + p3 + "%");
-
-            // Salud global
-            txpHealth.setText("Salud total: " + fullHealth + "%");
-        }
-    }
-
-    
-    public void insertImageinFrame(JLabel label, Fighter f){
-        URL resource = getClass().getResource(f.getImagePath());
-            if (resource == null) {
-        System.out.println("Imagen no encontrada");
-        return;
-        }
-        ImageIcon image = new ImageIcon(resource);
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(label.getWidth(),label.getHeight(), Image.SCALE_DEFAULT));
-        label.setIcon(icon);
-        label.revalidate();
-        label.repaint();
-        label.setOpaque(true);
-
-    }
-
-    public void showSummary(LogEvents Log){
-        Log.generateSummary();
-        txaRanking.setText(Log.getSummary());
-
-    }
-
-    public void showLog(LogEvents Log){
-        this.txaLogPlayer.setText(Log.getEventsAsString());
-
-    }
-    
-    public void mostrarFighterEnTextPane(JTextPane textPane, Fighter f){
-    StyledDocument doc = textPane.getStyledDocument();
-        try {
-            doc.remove(0, doc.getLength()); // Limpia contenido anterior
-        } catch (BadLocationException ex) {
-            System.getLogger(FrameClient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-
-    // Estilo: representation porcentage
-    Style porcentage = textPane.addStyle("porcentage", null);
-    StyleConstants.setFontSize(porcentage, 16);
-    StyleConstants.setForeground(porcentage, Color.BLACK);
-        try {
-            doc.insertString(doc.getLength(), String.format("%d", f.getCivilizationpercent()) + "%\n", porcentage);
-        } catch (BadLocationException ex) {
-            System.getLogger(FrameClient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-
-    // Estilo: name
-    Style name = textPane.addStyle("Name", null);
-    StyleConstants.setFontSize(name, 14);
-    StyleConstants.setBold(name, true);
-    StyleConstants.setForeground(name, f.getRepresentativeColor());
-        try {
-            doc.insertString(doc.getLength(), f.getName() + "\n", name);
-        } catch (BadLocationException ex) {
-            System.getLogger(FrameClient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-
-    // Estilo: attackgroup
-    Style attackgroup = textPane.addStyle("grupo", null);
-    StyleConstants.setFontSize(attackgroup, 14);
-    StyleConstants.setItalic(attackgroup, true);
-        try {
-            doc.insertString(doc.getLength(), "Attack Group: " + f.getAttackGroup().getName() + "\n\n", attackgroup);
-        } catch (BadLocationException ex) {
-            System.getLogger(FrameClient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-
-    // Estilo: stats
-    Style stats = textPane.addStyle("stats", null);
-    StyleConstants.setFontSize(stats, 12);
-        try {
-            doc.insertString(doc.getLength(),
-                    String.format("Power:       %d%%\nResistance: %d%%\nHealing:     %d%%\n",
-                            f.getPowerPercent(), f.getResistancePercent(), f.getHealingPercent()), stats);
-        } catch (BadLocationException ex) {
-            System.getLogger(FrameClient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-}
     public void writeMessage(String msg){
         txaMessages.append(msg + "\n");
         this.refreshFrame();
@@ -589,22 +395,17 @@ public class FrameClient extends JFrame {
     private void txfCommandKeyReleased(KeyEvent evt) {//GEN-FIRST:event_txfCommandKeyReleased
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if (respondThreeNumbersCommand){
-                this.commandRespondThreeNumbers = respondThreeNumbers();
-                this.cleanCommandWritter();
-                return;
-            }
             //obnter string del txf y quitar espacio
             String msg =  txfCommand.getText().trim();
             if (msg.length()>0){
                 String args[] = CommandUtil.tokenizerArgs(msg);
                 if (args.length > 0){
                     Command comando = CommandFactory.getCommand(args);
-                    if (!client.isDead() && !DisponibilityCheckerOfCommand.checkInicialCommandDisponibilty(comando, this.client.isIsReady(), client.getFighterRegister().getFighters())){
-                        this.writeMessage("Error: comando no permitido");
-                        this.cleanCommandWritter();
-                        return;
-                    }
+//                    if (!client.isDead() && !DisponibilityCheckerOfCommand.checkInicialCommandDisponibilty(comando, this.client.isIsReady(), client.getFighterRegister().getFighters())){
+//                        this.writeMessage("Error: comando no permitido");
+//                        this.cleanCommandWritter();
+//                        return;
+//                    }
                     if (client.isDead() && !DisponibilityCheckerOfCommand.checkDeadCommandDisponibility(comando)){
                         this.writeMessage("Error: comando no permitido");
                         this.cleanCommandWritter();

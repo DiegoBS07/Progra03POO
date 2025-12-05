@@ -33,7 +33,6 @@ public class CommandReady extends Command{
     @Override
     public void processInClient(Client client){
         client.setIsReady(true);
-        client.getRefFrame().initOceanMap();
 
     }
     
