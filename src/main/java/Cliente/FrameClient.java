@@ -32,8 +32,6 @@ import javax.swing.text.StyledDocument;
 public class FrameClient extends JFrame {
 
     private Client client;
-    private static final int NUMBER_OF_CELLS = 400;
-    private static final int NUMBER_OF_ROWS_AND_COLUMS = 20;
     private JPanel pnlImgFondo;
     private static final int CORRECT_EXIT = 0;
     /**
@@ -61,13 +59,6 @@ public class FrameClient extends JFrame {
         client.name = name;
         client.sendName();
         
-    }
-    public static int getNumberOfCells(){
-        return NUMBER_OF_CELLS;
-    }
-    
-    public static int getNumberOfRowsAndColumns(){
-        return NUMBER_OF_ROWS_AND_COLUMS;
     }
     
     
@@ -128,28 +119,22 @@ public class FrameClient extends JFrame {
         txfCommand = new javax.swing.JTextField();
         btnSend = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txaLogPlayer = new javax.swing.JTextArea();
+        txaEnemyStats = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         txaRanking = new javax.swing.JTextArea();
         btnClose = new javax.swing.JButton();
         pnlOceanMap = new javax.swing.JPanel();
-        pnlOceanMapGrid = new javax.swing.JPanel();
-        pnlOceanMapGrid1 = new javax.swing.JPanel();
+        pnlAttackReceived = new javax.swing.JPanel();
         pnlOceanMapGrid2 = new javax.swing.JPanel();
-        pnlOceanMapGrid3 = new javax.swing.JPanel();
-        pnlOceanMapGrid4 = new javax.swing.JPanel();
-        pnlOceanMapGrid5 = new javax.swing.JPanel();
-        pnlOceanMapGrid6 = new javax.swing.JPanel();
-        pnlOceanMapGrid7 = new javax.swing.JPanel();
-        pnlOceanMapGrid8 = new javax.swing.JPanel();
-        pnlOceanMapGrid9 = new javax.swing.JPanel();
         pnlWarriors = new javax.swing.JPanel();
         lblWarriorImage1 = new javax.swing.JLabel();
         lblWarriorImage2 = new javax.swing.JLabel();
         lblWarriorImage3 = new javax.swing.JLabel();
         lblWarriorImage4 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txaWarriorData = new javax.swing.JTextArea();
         jScrollPane9 = new javax.swing.JScrollPane();
-        txaResultadoAtaque1 = new javax.swing.JTextArea();
+        txaMyStats = new javax.swing.JTextArea();
         pnlColumnsHeader = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -177,9 +162,9 @@ public class FrameClient extends JFrame {
             }
         });
 
-        txaLogPlayer.setColumns(20);
-        txaLogPlayer.setRows(5);
-        jScrollPane2.setViewportView(txaLogPlayer);
+        txaEnemyStats.setColumns(20);
+        txaEnemyStats.setRows(5);
+        jScrollPane2.setViewportView(txaEnemyStats);
 
         txaRanking.setColumns(20);
         txaRanking.setRows(5);
@@ -196,56 +181,33 @@ public class FrameClient extends JFrame {
         pnlOceanMap.setOpaque(false);
         pnlOceanMap.setPreferredSize(new java.awt.Dimension(600, 600));
 
-        pnlOceanMapGrid.setBackground(new java.awt.Color(0, 51, 255));
-        pnlOceanMapGrid.setPreferredSize(new java.awt.Dimension(515, 400));
-        pnlOceanMapGrid.setLayout(new java.awt.GridLayout(20, 20));
+        pnlAttackReceived.setBackground(new java.awt.Color(102, 102, 102));
+        pnlAttackReceived.setPreferredSize(new java.awt.Dimension(515, 400));
 
-        pnlOceanMapGrid1.setBackground(new java.awt.Color(0, 51, 255));
-        pnlOceanMapGrid1.setPreferredSize(new java.awt.Dimension(515, 400));
-        pnlOceanMapGrid1.setLayout(new java.awt.GridLayout(20, 20));
-        pnlOceanMapGrid.add(pnlOceanMapGrid1);
+        javax.swing.GroupLayout pnlAttackReceivedLayout = new javax.swing.GroupLayout(pnlAttackReceived);
+        pnlAttackReceived.setLayout(pnlAttackReceivedLayout);
+        pnlAttackReceivedLayout.setHorizontalGroup(
+            pnlAttackReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 588, Short.MAX_VALUE)
+        );
+        pnlAttackReceivedLayout.setVerticalGroup(
+            pnlAttackReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 305, Short.MAX_VALUE)
+        );
 
-        pnlOceanMapGrid2.setBackground(new java.awt.Color(0, 51, 255));
+        pnlOceanMapGrid2.setBackground(new java.awt.Color(102, 102, 102));
         pnlOceanMapGrid2.setPreferredSize(new java.awt.Dimension(515, 400));
-        pnlOceanMapGrid2.setLayout(new java.awt.GridLayout(20, 20));
 
-        pnlOceanMapGrid3.setBackground(new java.awt.Color(0, 51, 255));
-        pnlOceanMapGrid3.setPreferredSize(new java.awt.Dimension(515, 400));
-        pnlOceanMapGrid3.setLayout(new java.awt.GridLayout(20, 20));
-        pnlOceanMapGrid2.add(pnlOceanMapGrid3);
-
-        pnlOceanMapGrid4.setBackground(new java.awt.Color(0, 51, 255));
-        pnlOceanMapGrid4.setPreferredSize(new java.awt.Dimension(515, 400));
-        pnlOceanMapGrid4.setLayout(new java.awt.GridLayout(20, 20));
-
-        pnlOceanMapGrid5.setBackground(new java.awt.Color(0, 51, 255));
-        pnlOceanMapGrid5.setPreferredSize(new java.awt.Dimension(515, 400));
-        pnlOceanMapGrid5.setLayout(new java.awt.GridLayout(20, 20));
-        pnlOceanMapGrid4.add(pnlOceanMapGrid5);
-
-        pnlOceanMapGrid2.add(pnlOceanMapGrid4);
-
-        pnlOceanMapGrid6.setBackground(new java.awt.Color(0, 51, 255));
-        pnlOceanMapGrid6.setPreferredSize(new java.awt.Dimension(515, 400));
-        pnlOceanMapGrid6.setLayout(new java.awt.GridLayout(20, 20));
-
-        pnlOceanMapGrid7.setBackground(new java.awt.Color(0, 51, 255));
-        pnlOceanMapGrid7.setPreferredSize(new java.awt.Dimension(515, 400));
-        pnlOceanMapGrid7.setLayout(new java.awt.GridLayout(20, 20));
-        pnlOceanMapGrid6.add(pnlOceanMapGrid7);
-
-        pnlOceanMapGrid8.setBackground(new java.awt.Color(0, 51, 255));
-        pnlOceanMapGrid8.setPreferredSize(new java.awt.Dimension(515, 400));
-        pnlOceanMapGrid8.setLayout(new java.awt.GridLayout(20, 20));
-
-        pnlOceanMapGrid9.setBackground(new java.awt.Color(0, 51, 255));
-        pnlOceanMapGrid9.setPreferredSize(new java.awt.Dimension(515, 400));
-        pnlOceanMapGrid9.setLayout(new java.awt.GridLayout(20, 20));
-        pnlOceanMapGrid8.add(pnlOceanMapGrid9);
-
-        pnlOceanMapGrid6.add(pnlOceanMapGrid8);
-
-        pnlOceanMapGrid2.add(pnlOceanMapGrid6);
+        javax.swing.GroupLayout pnlOceanMapGrid2Layout = new javax.swing.GroupLayout(pnlOceanMapGrid2);
+        pnlOceanMapGrid2.setLayout(pnlOceanMapGrid2Layout);
+        pnlOceanMapGrid2Layout.setHorizontalGroup(
+            pnlOceanMapGrid2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 588, Short.MAX_VALUE)
+        );
+        pnlOceanMapGrid2Layout.setVerticalGroup(
+            pnlOceanMapGrid2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 305, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout pnlOceanMapLayout = new javax.swing.GroupLayout(pnlOceanMap);
         pnlOceanMap.setLayout(pnlOceanMapLayout);
@@ -254,7 +216,7 @@ public class FrameClient extends JFrame {
             .addGroup(pnlOceanMapLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlOceanMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlOceanMapGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                    .addComponent(pnlAttackReceived, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                     .addComponent(pnlOceanMapGrid2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -262,7 +224,7 @@ public class FrameClient extends JFrame {
             pnlOceanMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOceanMapLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlOceanMapGrid, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlAttackReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlOceanMapGrid2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -271,36 +233,47 @@ public class FrameClient extends JFrame {
         pnlWarriors.setBackground(new java.awt.Color(51, 255, 51));
         pnlWarriors.setOpaque(false);
 
+        lblWarriorImage2.setBackground(new java.awt.Color(255, 255, 255));
+
+        txaWarriorData.setColumns(20);
+        txaWarriorData.setRows(5);
+        jScrollPane4.setViewportView(txaWarriorData);
+
         javax.swing.GroupLayout pnlWarriorsLayout = new javax.swing.GroupLayout(pnlWarriors);
         pnlWarriors.setLayout(pnlWarriorsLayout);
         pnlWarriorsLayout.setHorizontalGroup(
             pnlWarriorsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlWarriorsLayout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
-                .addComponent(lblWarriorImage2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblWarriorImage3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblWarriorImage4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblWarriorImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+            .addGroup(pnlWarriorsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlWarriorsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlWarriorsLayout.createSequentialGroup()
+                        .addComponent(lblWarriorImage2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblWarriorImage3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblWarriorImage4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblWarriorImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         pnlWarriorsLayout.setVerticalGroup(
             pnlWarriorsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlWarriorsLayout.createSequentialGroup()
-                .addGap(115, 115, 115)
+                .addGap(17, 17, 17)
                 .addGroup(pnlWarriorsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblWarriorImage2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblWarriorImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblWarriorImage4, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblWarriorImage3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4)
+                .addContainerGap())
         );
 
-        txaResultadoAtaque1.setColumns(20);
-        txaResultadoAtaque1.setRows(5);
-        jScrollPane9.setViewportView(txaResultadoAtaque1);
+        txaMyStats.setColumns(20);
+        txaMyStats.setRows(5);
+        jScrollPane9.setViewportView(txaMyStats);
 
         pnlColumnsHeader.setPreferredSize(new java.awt.Dimension(515, 52));
         pnlColumnsHeader.setLayout(new java.awt.GridLayout(1, 20));
@@ -332,7 +305,7 @@ public class FrameClient extends JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 251, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -352,8 +325,8 @@ public class FrameClient extends JFrame {
                         .addComponent(pnlOceanMap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE))
                     .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txfCommand, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSend))
@@ -470,28 +443,22 @@ public class FrameClient extends JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel lblWarriorImage1;
     private javax.swing.JLabel lblWarriorImage2;
     private javax.swing.JLabel lblWarriorImage3;
     private javax.swing.JLabel lblWarriorImage4;
+    private javax.swing.JPanel pnlAttackReceived;
     private javax.swing.JPanel pnlColumnsHeader;
     private javax.swing.JPanel pnlOceanMap;
-    private javax.swing.JPanel pnlOceanMapGrid;
-    private javax.swing.JPanel pnlOceanMapGrid1;
     private javax.swing.JPanel pnlOceanMapGrid2;
-    private javax.swing.JPanel pnlOceanMapGrid3;
-    private javax.swing.JPanel pnlOceanMapGrid4;
-    private javax.swing.JPanel pnlOceanMapGrid5;
-    private javax.swing.JPanel pnlOceanMapGrid6;
-    private javax.swing.JPanel pnlOceanMapGrid7;
-    private javax.swing.JPanel pnlOceanMapGrid8;
-    private javax.swing.JPanel pnlOceanMapGrid9;
     private javax.swing.JPanel pnlWarriors;
-    private javax.swing.JTextArea txaLogPlayer;
+    private javax.swing.JTextArea txaEnemyStats;
     private javax.swing.JTextArea txaMessages;
+    private javax.swing.JTextArea txaMyStats;
     private javax.swing.JTextArea txaRanking;
-    private javax.swing.JTextArea txaResultadoAtaque1;
+    private javax.swing.JTextArea txaWarriorData;
     private javax.swing.JTextField txfCommand;
     // End of variables declaration//GEN-END:variables
 }
