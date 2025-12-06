@@ -8,6 +8,8 @@ import Comands.Command;
 import Comands.CommandGiveup;
 import Comands.CommandSkipTurn;
 import Comands.*;
+import Warriors.Warrior;
+import Warriors.WarriorRegister;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -15,6 +17,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,6 +37,7 @@ public class ThreadServidor extends Thread{
     private boolean isReady = false;
     public boolean isActive = true;
     public boolean isRunning = true;
+    private WarriorRegister Warriors = new WarriorRegister();
     
     
     
@@ -157,4 +162,14 @@ public class ThreadServidor extends Thread{
     public void setReady(boolean ready) {
         isReady = ready;
     }
+
+    public WarriorRegister getWarriors() {
+        return Warriors;
+    }
+
+    public void setWarriors(WarriorRegister Warriors) {
+        this.Warriors = Warriors;
+    }
+    
+    
 }

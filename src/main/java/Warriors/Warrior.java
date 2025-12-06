@@ -17,13 +17,15 @@ public class Warrior {
     private ElementalType type;
     private List<Weapon> weapons = new ArrayList<>(); //Armas por guerreros.
     private int vida;
+    private String warriorImage;
 
-    public Warrior(String name, ElementalType type, int vida) {
+    public Warrior(String name, ElementalType type, int vida, String warriorImage) {
         this.name = name;
         this.type = type;
-        this.vida = vida;
+        this.vida = 100; //Vida inicial del guerrero.
+        this.warriorImage = warriorImage;
     }
-
+    
     public List<Weapon> getWeapons() {
         return weapons;
     }
@@ -31,6 +33,27 @@ public class Warrior {
     public void setWeapons(List<Weapon> weapons) {
         this.weapons = weapons;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public ElementalType getType() {
+        return type;
+    }
+
+    public String getWarriorImage() {
+        return warriorImage;
+    }
+    
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+    
     
     
     

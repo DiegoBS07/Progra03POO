@@ -6,6 +6,7 @@ package Cliente;
 
 import Comands.Command;
 import Servidor.Server;
+import Warriors.Warrior;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class ThreadClient extends Thread{
     public void run (){
         
         Command comandoRecibido;
+        Warrior receivedWarrior;
         while (isRunning){
             try {
                 Object recibido = client.objectListener.readObject(); //Recibe el objeto del server, este siendo de cualquier clase.
@@ -38,6 +40,11 @@ public class ThreadClient extends Thread{
                 if(recibido instanceof Command){
                 comandoRecibido = (Command) recibido;
                 comandoRecibido.processInClient(client);
+                }
+                else if(recibido instanceof Warrior){
+                    receivedWarrior = (Warrior)recibido;
+                    this.client.getWarriors().registerWarrior(receivedWarrior);
+                    //TODO: Colocar Warrior en la interfaz Grafica
                 }
             } catch (IOException ex) {
             } catch (ClassNotFoundException ex) {

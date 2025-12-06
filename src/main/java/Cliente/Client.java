@@ -6,10 +6,14 @@ package Cliente;
 
 import Comands.Command;
 import Comands.CommandFactory;
+import Warriors.Warrior;
+import Warriors.WarriorRegister;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,6 +31,7 @@ public class Client {
     private boolean dead = false;
     
     public String name;
+    private WarriorRegister Warriors = new WarriorRegister(); //Lista que tendra cada cliente con sus 4 guerreros
 
     public Client(FrameClient refFrame, String name) {
         this.refFrame = refFrame;
@@ -102,6 +107,16 @@ public class Client {
     public boolean isDead() {
         return dead;
     }
+
+    public WarriorRegister getWarriors() {
+        return Warriors;
+    }
+
+    public void setWarriors(WarriorRegister Warriors) {
+        this.Warriors = Warriors;
+    }
+    
+    
 }
 
 
